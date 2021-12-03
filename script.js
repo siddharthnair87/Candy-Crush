@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const grid = document.querySelector(".grid");
   const width = 8;
   const squares = [];
+  let score = 0;
 
   const candyColors = ["red", "yellow", "purple", "orange", "green", "blue"];
 
@@ -44,10 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     console.log("clicked");
   }
-  function dragEnd(e) {
-    e.preventDefault();
-    console.log("klk");
-  }
 
   function dragDrop() {
     console.log("drop id", this.id);
@@ -55,4 +52,43 @@ document.addEventListener("DOMContentLoaded", () => {
     squareIdBeingReplaced = parseInt(this.id);
     squares[squareIdBeingDragged].style.backgroundColor = colorBeingReplaced;
   }
+
+  function dragEnd(e) {
+    let validMoves = [
+      squareIdBeingDragged - 1,
+      squareIdBeingDragged - width,
+      squareIdBeingDragged + 1,
+      squareIdBeingDragged + width,
+    ];
+    let validMove = validMoves.includes(squareIdBeingReplaced);
+
+    if (squareIdBeingReplaced && validMove) {
+      squareIdBeingReplaced = null;
+    } else if (squareIdBeingReplaced && !validMove) {
+      squares[squareIdBeingReplaced].style.backgroundColor = colorBeingReplaced;
+      squares[squareIdBeingDragged].style.backgroundColor = colorBeingDragged;
+    } else
+      squares[squareIdBeingDragged].style.backgroundColor = colorBeingDragged;
+  }
+
+  function checkRowForThree() {
+    for (let i = 0; i < 61; i++) {
+      let rowOfThree = [i, i + 1, i + 2];
+      let decidedColor = squares[i].style.backgroundColor;
+      const isBlank = squares[i].style.backgroundColor === "";
+      //comment to check the difference
+      if (
+        rowOfThree.every(
+          (index) =>
+            squares[index].style.backgroundColor === decidedColor && !isBlank
+        )
+      ) {
+        score += 3;
+        rowOfThree.forEach((index) => {
+          squares[index].style.backgroundColor = "";
+        });
+      }
+    }
+  }
+  checkRowForThree();
 });
