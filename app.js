@@ -24,7 +24,7 @@ function addToDo(e) {
 
 const deleteCheck = (e) => {
   const item = e.target;
-  console.log(item);
+  console.log(item.classList);
   if (item.classList[0] === "trashButton") {
     const todo = item.parentElement;
     todo.classList.add("fall");
