@@ -27,7 +27,10 @@ const deleteCheck = (e) => {
   console.log(item);
   if (item.classList[0] === "trashButton") {
     const todo = item.parentElement;
-    todo.remove();
+    todo.classList.add("fall");
+    todo.addEventListener("transitionend", function () {
+      todo.remove();
+    });
   }
 
   if (item.classList[0] === "completedButton") {
