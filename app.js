@@ -21,4 +21,13 @@ function addToDo(e) {
   todoList.appendChild(todoDiv);
   todoInput.value = "";
 }
+
+const deleteCheck = (e) => {
+  const item = e.target;
+  console.log(item);
+  if (item.classList[0] === "trashButton") {
+    const todo = item.parentElement;
+    todo.remove();
+  }
+};
 todoButton.addEventListener("click", addToDo);
