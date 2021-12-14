@@ -1,70 +1,25 @@
-const todoInput = document.querySelector(".todo-input");
-const todoButton = document.querySelector(".todo-button");
-const todoList = document.querySelector(".todo-list");
-const filterOption = document.querySelector(".filter-todo");
+//Variables
+let picArray = [
+  "https://cdn.pixabay.com/photo/2017/01/08/13/58/cube-1963036__340.jpg",
+  "https://media.istockphoto.com/photos/random-multicolored-spheres-computer-generated-abstract-form-of-large-picture-id1295274245?b=1&k=20&m=1295274245&s=170667a&w=0&h=4t-XT7aI_o42rGO207GPGAt9fayT6D-2kw9INeMYOgo=",
+  "https://www.pngitem.com/pimgs/m/372-3721347_roastedchicken-rolled-a-random-image-posted-in-comment.png",
+];
+let startingIndex = 0;
 
-function addToDo(e) {
-  e.preventDefault();
-  const todoDiv = document.createElement("div");
-  todoDiv.classList.add("todo");
-  const newTodo = document.createElement("li");
-  newTodo.innerText = todoInput.value;
-  newTodo.classList.add("todo-item");
-  todoDiv.appendChild(newTodo);
-  const completedButton = document.createElement("button");
-  completedButton.innerHTML = '<i class="fas fa-check"></i>';
-  completedButton.classList.add("completedButton");
-  todoDiv.appendChild(completedButton);
-  const trashButton = document.createElement("button");
-  trashButton.innerHTML = '<i class="fas fa-trash"></i>';
-  trashButton.classList.add("trashButton");
-  todoDiv.appendChild(trashButton);
-  todoList.appendChild(todoDiv);
-  todoInput.value = "";
-}
+//Selectors
 
-const deleteCheck = (e) => {
-  const item = e.target;
-  console.log(item.classList);
-  if (item.classList[0] === "trashButton") {
-    const todo = item.parentElement;
-    todo.classList.add("fall");
-    todo.addEventListener("transitionend", function () {
-      todo.remove();
-    });
-  }
+const slide = document.querySelector(".slide");
+const carousel = document.querySelector(".carousel-container");
 
-  if (item.classList[0] === "completedButton") {
-    const todo = item.parentElement;
-    todo.classList.toggle("completed");
-  }
-};
+//Create Elements
 
-const filterTodo = (e) => {
-  const todos = todoList.childNodes;
-  todos.forEach((todo) => {
-    switch (e.target.value) {
-      case "all":
-        todo.style.display = "flex";
-        break;
-      case "completed":
-        if (todo.classList.contains("completed")) {
-          todo.style.display = "flex";
-        } else {
-          todo.style.display = "none";
-        }
-        break;
-      case "uncompleted":
-        if (!todo.classList.contains("completed")) {
-          todo.style.display = "flex";
-        } else {
-          todo.style.display = "none";
-        }
-        break;
-    }
-  });
-};
+const leftButton = document.createElement("button");
+leftButton.classList.add("leftButton");
+const rightButton = document.createElement("button");
+rightButton.classList.add("rightButton");
 
-filterOption.addEventListener("click", filterTodo);
-todoButton.addEventListener("click", addToDo);
-todoList.addEventListener("click", deleteCheck);
+leftButton.innerText = "<";
+rightButton.innerText = ">";
+
+carousel.appendChild(leftButton);
+carousel.appendChild(rightButton);
