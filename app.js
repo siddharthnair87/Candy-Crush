@@ -23,3 +23,25 @@ rightButton.innerText = ">";
 
 carousel.appendChild(leftButton);
 carousel.appendChild(rightButton);
+
+// Functions
+
+function moveForward() {
+  slide.src = picArray[startingIndex];
+  if (startingIndex < picArray.length - 1) {
+    startingIndex++;
+  } else startingIndex = 0;
+
+  console.log(startingIndex);
+}
+const moveBack = () => {
+  slide.src = picArray[startingIndex];
+  if (1 <= startingIndex) {
+    startingIndex--;
+  } else startingIndex = picArray.length - 1;
+};
+
+leftButton.addEventListener("click", moveBack);
+rightButton.addEventListener("click", moveForward);
+
+window.onload = moveForward;

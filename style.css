@@ -13,16 +13,22 @@ header {
 
 .carousel-container {
   position: relative;
+  top: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 60px;
 }
 
+.slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  right: 70px;
+}
 .leftButton,
 .rightButton {
   cursor: pointer;
-  position: absolute;
+  position: relative;
   top: 40%;
   width: auto;
   padding: 16px;
@@ -41,10 +47,5 @@ header {
 }
 
 .leftButton {
-  left: 30rem;
-  top: 100px;
-}
-.rightButton {
-  right: 30rem;
-  top: 100px;
+  right: 500px;
 }
